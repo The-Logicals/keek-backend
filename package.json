@@ -4,9 +4,19 @@
   "description": "Backend service for keek",
   "main": "index.js",
   "scripts": {
+    "build": "babel server -d dist",
+    "start:dev": "babel-watch server/index.js",
+    "start": "cross-env NODE_ENV=production && npm run build && node dist/index.js",
+    "seed": "npx sequelize db:seed:all",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
     "test": "PORT=4000 nyc --reporter=html --reporter=text mocha tests/**/*.js --exit",
-    "start:dev": "nodemon index.js",
-    "start": "node index.js"
+    "eslint:fix": "eslint --fix server/",
+    "prettier:check": "prettier --check \"./**/*.js\"",
+    "prettier:fix": "prettier --write \"./**/*.js\"",
+    "eslint:check": " node node_modules/eslint/bin/eslint.js \"./**/*.js\"",
+    "check:lint": "npm run eslint:check && npm run prettier:check",
+    "env": "sync-dotenv"
   },
   "repository": {
     "type": "git",
@@ -20,20 +30,60 @@
   },
   "homepage": "https://github.com/The-Logicals/keek-backend#readme",
   "dependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.4.0",
+    "@babel/polyfill": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/register": "^7.4.0",
+    "@babel/runtime": "^7.8.4",
+    "@hapi/joi": "^17.1.1",
+    "@sendgrid/mail": "^7.2.0",
+    "babel-eslint": "^10.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "bull": "^3.14.0",
     "chai": "^4.2.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "koii": "^2.0.6",
+    "nodemailer": "^6.4.8",
+    "pg": "^8.2.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.13",
+    "sequelize-cli": "^5.5.1",
+    "sync-dotenv": "^2.6.1"
   },
   "devDependencies": {
+    "babel-watch": "^7.0.0",
     "eslint": "^7.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-prettier": "^3.1.3",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.10",
     "mocha": "^7.2.0",
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
     "prettier": "^2.0.5",
     "request": "^2.88.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push_": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "npm run env",
+      "prettier --write",
+      "git add"
+    ]
   }
 }
