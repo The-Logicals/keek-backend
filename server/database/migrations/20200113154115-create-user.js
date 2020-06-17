@@ -28,6 +28,14 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
+      resetToken: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      resetTokenExpiry: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

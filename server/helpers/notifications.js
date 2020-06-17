@@ -26,11 +26,33 @@ const registrationEmail = (emailTo, link, name) => {
   sendMailQueue.add(data, options);
 };
 
+/**
+ *
+ * @param {*} emailTo
+ * @param {*} link
+ * @param {*} name
+ * @returns {*} sends an email to a user requesting a password reset
+ */
+const forgotPasswordEmail = (emailTo, link, name) => {
+  const subject = 'Keek password reset';
+  const body = `<p>Hi ${name},</p>
+  <p>Click the link below to reset your password.</p>
+  <a href="${link}" class="button">Reset Password</a>`;
+  const message = template(subject, body, emailTo);
+
+  const options = {
+    attempts: 2,
+  };
+  const data = { emailTo, subject, message };
+
+  sendMailQueue.add(data, options);
+};
+
 // Consumer: this gets called each time the producer receives a new email.
 sendMailQueue.process(async (job) => {
   emailService.mailSender(job.data);
 });
 
-const Notifications = { registrationEmail };
+const Notifications = { registrationEmail, forgotPasswordEmail };
 
 export default Notifications;
