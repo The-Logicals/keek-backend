@@ -1,4 +1,4 @@
-require('./index');
+require('./server/index');
 const { expect } = require('chai');
 
 const appRoute = 'http://localhost:4000';
