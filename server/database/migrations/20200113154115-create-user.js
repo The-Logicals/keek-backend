@@ -24,6 +24,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      avatar: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      bio: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       isVerified: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

@@ -44,7 +44,8 @@ export default class AuthController {
     } catch (error) {
       return res.status(500).send({
         status: false,
-        message: 'something went wrong',
+        message:
+          'Something went wrong while processing your request do try again later',
         error: error.message,
       });
     }
@@ -82,7 +83,8 @@ export default class AuthController {
     } catch (error) {
       return res.status(500).json({
         status: false,
-        message: 'something went wrong',
+        message:
+          'Something went wrong while processing your request do try again later',
         error: error.message,
       });
     }
@@ -112,7 +114,7 @@ export default class AuthController {
       if (!verifiedPassword) {
         return res.status(401).send({
           status: false,
-          error: 'Bad Login',
+          error: 'Invalid email or password',
         });
       }
 
@@ -131,7 +133,8 @@ export default class AuthController {
     } catch (error) {
       return res.status(500).send({
         status: false,
-        message: 'something went wrong',
+        message:
+          'Something went wrong while processing your request do try again later',
         error: error.message,
       });
     }
@@ -175,7 +178,8 @@ export default class AuthController {
       /* istanbul ignore next */
       return res.status(500).json({
         status: false,
-        message: 'something went wrong',
+        message:
+          'Something went wrong while processing your request do try again later',
         error: error.message,
       });
     }

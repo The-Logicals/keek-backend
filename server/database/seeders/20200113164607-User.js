@@ -6,7 +6,10 @@ module.exports = {
         fullName: 'John Doe',
         username: 'jd',
         email: 'john@example.com',
-        password: '12345678',
+        password:
+          '$2a$10$8/KK1wofI6FZ5cEZs95yieARd.D04bML2f/nYnh/KC4TIreoUyvjK',
+        bio: 'Shiny bio',
+        avatar: 'https://picsum.photos/200',
         isVerified: true,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -16,7 +19,10 @@ module.exports = {
         fullName: 'Jane Doe',
         username: 'jane',
         email: 'jane@example.com',
-        password: '12345678',
+        password:
+          '$2a$10$8/KK1wofI6FZ5cEZs95yieARd.D04bML2f/nYnh/KC4TIreoUyvjK',
+        bio: 'Shiny bio',
+        avatar: 'https://picsum.photos/200',
         isVerified: true,
         resetToken: '41b5d17a-b2b9-40fa-9587-6bd7c93ab5a9',
         resetTokenExpiry: new Date('2016-01-17T18:05:00.000+00:00'),
