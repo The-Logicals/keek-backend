@@ -10,7 +10,7 @@
     "seed": "npx sequelize db:seed:all",
     "migrate": "npx sequelize-cli db:migrate",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
-    "test": "PORT=4000 nyc --reporter=html --reporter=text mocha tests/**/*.js --exit",
+    "test": "PORT=4000 nyc --reporter=html --reporter=text mocha --require @babel/register --require @babel/polyfill tests/**/*.js --exit",
     "eslint:fix": "eslint --fix server/",
     "prettier:check": "prettier --check \"./**/*.js\"",
     "prettier:fix": "prettier --write \"./**/*.js\"",

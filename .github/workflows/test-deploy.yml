@@ -1,0 +1,42 @@
+name: Keek test deploy
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: node:12
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: keek_test
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      PORT: 4000
+      SECRETKEY: secret
+      NODE_ENV: test
+      DATABASE_URL: postgres://postgres:5432/keek_test
+      DEV_DATABASE_URL: postgres://postgres:5432/keek_test
+      TEST_DATABASE_URL: postgres://postgres:5432/keek_test
+      SENDGRID_API_KEY: ''
+      REDIS_URL: ''
+      REGISTRATION_URL: ''
+      RESET_TOKEN_EXPIRY_MINS: 329232
+      FRONTEND_APP_URL: localhost
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run test
+        run: npm run test
