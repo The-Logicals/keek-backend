@@ -22,7 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        unique: {
+          args: true,
+          msg: 'This email already exists!',
+        },
       },
       password: {
         type: DataTypes.STRING,
@@ -68,6 +71,17 @@ module.exports = (sequelize, DataTypes) => {
 
     delete values.password;
     return values;
+  };
+  User.associate = (models) => {
+    const { AddressBook, Contact } = models;
+
+    User.hasOne(Contact, {
+      foreignKey: 'userId',
+    });
+
+    User.hasOne(AddressBook, {
+      foreignKey: 'userId',
+    });
   };
   return User;
 };
