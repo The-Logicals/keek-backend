@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel server -d dist",
     "start:dev": "babel-watch server/index.js",
-    "start": "cross-env NODE_ENV=production && npm run build && node dist/index.js",
+    "start": "cross-env NODE_ENV=production && node dist/index.js",
     "seed": "npx sequelize db:seed:all",
     "migrate": "npx sequelize-cli db:migrate",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
@@ -16,7 +16,8 @@
     "prettier:fix": "prettier --write \"./**/*.js\"",
     "eslint:check": " node node_modules/eslint/bin/eslint.js \"./**/*.js\"",
     "check:lint": "npm run eslint:check && npm run prettier:check",
-    "env": "sync-dotenv"
+    "env": "sync-dotenv",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
