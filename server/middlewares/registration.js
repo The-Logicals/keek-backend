@@ -31,7 +31,7 @@ const registrationValidation = async (req, res, next) => {
   if (user) {
     return res.status(409).json({
       status: false,
-      error: 'Please enter a unique email.',
+      error: 'email already exist',
     });
   }
 

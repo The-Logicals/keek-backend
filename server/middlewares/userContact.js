@@ -11,7 +11,7 @@ const addUserContactValidation = async (req, res, next) => {
   if (!contact) {
     return res.status(404).json({
       status: false,
-      error: 'Contact does not exist on the platform yet.',
+      error: 'user does not exist',
     });
   }
 
