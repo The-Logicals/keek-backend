@@ -77,4 +77,14 @@ export default class BaseService {
       offset,
     });
   }
+
+  /**
+   * @method findOrCreate
+   * @param {object} dataObject
+   * @returns {object} created or found object
+   */
+  async findOrCreate(dataObject) {
+    const data = this.model.findOrCreate(dataObject);
+    return data;
+  }
 }
