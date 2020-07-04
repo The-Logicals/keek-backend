@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 
 import { authService } from '../services/authService';
+import { contactService } from '../services/contactService';
 import authHelper from '../helpers/auth';
 import notifications from '../helpers/notifications';
 import Env from '../../Env';
@@ -76,6 +77,11 @@ export default class AuthController {
       }
 
       await authService.update({ isVerified: true }, { id: user.id });
+
+      await contactService.create({
+        userId: user.id,
+      });
+
       return res.status(200).json({
         status: true,
         message: 'Account verification was successful',

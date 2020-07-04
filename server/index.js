@@ -1,8 +1,10 @@
+import socket from 'socket.io';
 import koii from 'koii';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
 import routes from './routes/index';
+import sockets from './socket';
 
 const express = require('express');
 const Env = require('../Env');
@@ -29,9 +31,13 @@ app.all('*', (req, res) => {
   });
 });
 
-app.listen(port, () =>
+const server = app.listen(port, () =>
   // eslint-disable-next-line no-console
   console.log(`Keek API service started at http://localhost:${port}`)
 );
+
+// socket setup
+const io = socket(server);
+sockets(io);
 
 module.exports = app;

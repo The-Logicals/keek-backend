@@ -1,8 +1,10 @@
 import Joi from '@hapi/joi';
 import joiFormatter from '../helpers/joi-formatter';
+import { authService } from '../services/authService';
 
 const registrationValidation = async (req, res, next) => {
   const { body } = req;
+  const { email } = body;
 
   const schema = Joi.object({
     fullName: Joi.string().required(),
@@ -24,6 +26,15 @@ const registrationValidation = async (req, res, next) => {
       error: formattedMessage,
     });
   }
+
+  const user = await authService.find({ email });
+  if (user) {
+    return res.status(409).json({
+      status: false,
+      error: 'email already exist',
+    });
+  }
+
   return next();
 };
 

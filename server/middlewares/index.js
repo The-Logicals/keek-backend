@@ -4,6 +4,8 @@ import forgotPasswordMiddleware from './forgotPassword';
 import resetPasswordMiddleware from './resetPassword';
 import tokenValidator from './isLoggedIn';
 import profile from './profile';
+import addUserContactMiddleware from './userContact';
+import removeUserContactMiddleware from './removeContact';
 
 export default {
   registrationMiddleware,
@@ -12,4 +14,6 @@ export default {
   resetPasswordMiddleware,
   tokenValidator,
   profile,
+  addUserContactMiddleware,
+  removeUserContactMiddleware,
 };
