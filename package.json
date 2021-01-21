@@ -58,7 +58,7 @@
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.13",
     "sequelize-cli": "^5.5.1",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "sync-dotenv": "^2.6.1",
     "uuid": "^8.1.0"
   },
